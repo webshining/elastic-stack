@@ -37,12 +37,13 @@ passwords=(
 
 # --- main ---
 for name in "${!passwords[@]}"; do
+	log "user [NAME: $name]"
     if (("$(is_user_exists "$name")")); then
         change_password "$name" "${passwords[$name]}" || exit_code=$?
 		if ((exit_code)); then
 			continue
 		else
-			log "password for $name successfully set"
+			sublog "password successfully set"
 		fi
     fi
 done

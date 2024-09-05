@@ -1,0 +1,25 @@
+# ============================== Filebeat inputs ===============================
+
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/app.json
+    json.keys_under_root: true
+    json.add_error_key: true
+
+# ---------------------------- Elasticsearch Output ----------------------------
+
+output.elasticsearch:
+  hosts: "${ELASTICSEARCH_HOSTS}"
+  username: "elastic"
+  password: "${ELASTIC_PASSWORD:-changeme}"
+
+# ================================= Processors =================================
+
+processors:
+  - add_host_metadata:
+      when.not.contains.tags: forwarded
+  - add_cloud_metadata: ~
+  - add_docker_metadata: ~
+  - add_kubernetes_metadata: ~

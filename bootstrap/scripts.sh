@@ -75,9 +75,9 @@ log() {
 }
 
 sublog() {
-	echo -e "\t\t[-] $1"
+	echo -e "\t[~] $1"
 }
 
 suberr() {
-	echo -e "\t\t[x]$1" >&2
+	echo -e "\t[x] $1" >&2
 }
